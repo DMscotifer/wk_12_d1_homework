@@ -1,42 +1,60 @@
+// SEED IT!!!
 var app = function() {
-
-// createCatPost("Neo", "Smith's", "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.nawt.org.uk%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fflexslider_full_tall%2Fpublic%2Fcats%2F20170201_095922_0.jpg%3Fitok%3DfiXlY8cZ&f=1");
-
-createPost("Neo");
-}
-
-  // CAT has: name, favourite food, image
-function createCatPost(name, favfood, imageLink) {
-  function inputName(name) {
-    var liName = document.createElement('li');
-    liName.textContent = "Name: " + name;
-    return liName;
-  }
-
-
-function inputFavouriteFood(favfood) {
-  var liFavouriteFood = document.createElement('li');
-  liFavouriteFood.textContent = "Favourite food: " + favfood;
-  return liFavouriteFood;
+  addCat("Rosa", "Whiskas", "https://artbygabi.files.wordpress.com/2014/05/p1020637.jpg");
+  addCat("Damien", "Human souls", "https://i.imgur.com/RIMjpT5.jpg?1")
 }
 
 
-function createImg(imageLink) {}
+// CALL IT
+var addCat = function(name, favFood, url) {
+  var image = createImage(url);
+  var catName = createName(name);
+  var catFood = createFood(favFood);
 
-function createFullElement(cat, name, favefood, img) {
-    const catSection = document.querySelector('#cats');
-    cat.appendChild(name);
-    catSection.appendChild(cat);
+  appendAllElements(catName, catFood, image);
 }
 
 
-const newCatPic = function(name, favfood, img) {
-
-const fullElement = createFullElement(cat, textDataName, textDataFavFood, imgData);
-
+// CREATE IT
+var createImage = function(url){
+// GIVE IT A TAG
+  var imageLi = document.createElement("li");
+  // imageLi.innerHtml = "<img width=500 src = \'" + url + "\' >";
+  var imagetag = document.createElement("img");
+  imagetag.width = "500";
+  imagetag.src = url;
+// APPEND IT NOW!
+  imageLi.appendChild(imagetag);
+  return imageLi;
 }
 
+// SAME BUT DIFFERENT
+var createName = function(name) {
+  var nameLi = document.createElement("li");
+  nameLi.textContent = name;
+  return nameLi;
 }
 
+// SAME BUT DIFFERENT
+var createFood = function(food){
+  var foodLi = document.createElement("li");
+  foodLi.textContent = "Favourite food: " + food;
+  return foodLi;
+}
 
+// APPEND EVERYTHING TO ONE ALL ENCOMPASSING VARIABLE MADE UP OF ALL THE DIFFERENT PARTS
+var appendAllElements = function(nameLi, foodLi, imageLi){
+  var catList = document.createElement("ul");
+  catList.classList.add("cat");
+  // APPEND IN THE RIGHT ORDER
+  catList.appendChild(nameLi);
+  catList.appendChild(foodLi);
+  catList.appendChild(imageLi);
+
+
+  var container = document.querySelector("#cats");
+  container.appendChild(catList);
+}
+
+// HASTA LA VISTA, BABY
 window.onload = app;
